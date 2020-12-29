@@ -3,12 +3,13 @@ const cheerio = require('cheerio');
 const express = require('express');
 
 const url = "https://dsc.community.dev/jaypee-institute-of-information-technology-sec-128/";
+const port = 9000;
 var webdata =  "initial";
 var pastEvents = [];
-var upcommingEvents = "";
+var upcommingEvents = [];
 
 async function getData() {
-    axios.get(url).then(res => {
+    await axios.get(url).then(res => {
         webdata = res.data;
         console.log("I am loaded")
         const $ = cheerio.load(webdata);
@@ -44,13 +45,30 @@ async function getData() {
         else {
             upcommingEvents= $('#upcoming-events .general-body--color').text();
         }
-        
-        console.log(pastEvents);
-        console.log(upcommingEvents);
     })
         .catch(error => {
             console.log(error);
         })
 }
 
-getData();
+const app = express();
+
+
+app.get('/data', async (req, res)=> {
+    getData().then(()=> {
+        console.log(pastEvents);
+        console.log(upcommingEvents);
+        res.send({
+            past: pastEvents,
+            upcoming: upcommingEvents
+        })
+    })
+    .catch((error)=> {
+        res.send(error);
+    })
+})
+
+
+app.listen(port, () => {
+    console.log('Server listening on port ' + port);
+});
