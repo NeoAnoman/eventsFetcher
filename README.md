@@ -7,4 +7,4 @@ Dont forget to install the dependencies
 `npm i --save`  
 To start the script on cmd type  
 `node script.js`  
-**How to make request** It runs on port 9000, to make a request hit localhost:9000/data with a GET request.
+**How to make request:- ** It runs on port 9000, to make a request hit localhost:9000/data with a GET request.
