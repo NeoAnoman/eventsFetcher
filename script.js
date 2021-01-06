@@ -29,15 +29,16 @@ async function getData() {
         else {
             pastEvents = $('#past-events .general-body--color').text();
         }
-        if ($('#upcoming-events .vertical-boxes a').attr('href') != undefined) {
-            $('#upcoming-events .vertical-boxes a:nth-child(n)').each((i, elem) => {
+        if ($('#upcoming-events .event-list a').attr('href') != undefined) {
+            console.log("found");
+            $('#upcoming-events .event-list .row:nth-child(n)').each((i, elem) => {
                 // console.log($(elem).find('p.vertical-box--event-date').text())
-                pastEvents.push({
+                upcommingEvents.push({
                     id: i + 1,
-                    link: 'https://dsc.community.dev/' + $(elem).attr('href'),
-                    date: $(elem).find('p.vertical-box--event-date').text().replace(/  |\n/g, ''),
-                    type: $(elem).find('p.vertical-box--event-type').text().replace(/  |\n/g, ''),
-                    title: $(elem).find('p.vertical-box--event-title').text().replace(/  |\n/g, ''),
+                    link: 'https://dsc.community.dev/' + $(elem).find('a.picture').attr('href'),
+                    date: $(elem).find('div.date strong').text().replace(/  |\n/g, ''),
+                    type: $(elem).find('div.date span').text().replace(/  |\n/g, ''),
+                    title: $(elem).find('h4.general-body--color').text().replace(/  |\n/g, ''),
                     image: $(elem).find('img').attr('src')
                 })
             });
