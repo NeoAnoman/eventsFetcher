@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const express = require('express');
 
 const url = "https://dsc.community.dev/jaypee-institute-of-information-technology-sec-128/";
-const port = 9000;
+const port = process.env.PORT || 9000;
 var webdata =  "initial";
 var pastEvents = [];
 var upcommingEvents = [];
