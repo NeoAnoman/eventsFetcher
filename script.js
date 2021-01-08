@@ -14,6 +14,7 @@ async function getData() {
         console.log("I am loaded")
         const $ = cheerio.load(webdata);
         if ($('#past-events .vertical-boxes a').attr('href') != undefined) {
+            pastEvents = [];
             $('#past-events .vertical-boxes a:nth-child(n)').each((i, elem)=> {
                 // console.log($(elem).find('p.vertical-box--event-date').text())
                 pastEvents.push({
@@ -27,9 +28,11 @@ async function getData() {
             });
         }
         else {
+            pastEvents = [];
             pastEvents = $('#past-events .general-body--color').text();
         }
         if ($('#upcoming-events .event-list a').attr('href') != undefined) {
+            upcommingEvents = [];
             console.log("found");
             $('#upcoming-events .event-list .row:nth-child(n)').each((i, elem) => {
                 // console.log($(elem).find('p.vertical-box--event-date').text())
@@ -44,6 +47,7 @@ async function getData() {
             });
         }
         else {
+            upcommingEvents = [];
             upcommingEvents= $('#upcoming-events .general-body--color').text();
         }
     })
