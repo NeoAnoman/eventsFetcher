@@ -61,6 +61,7 @@ const app = express();
 
 app.get('/data', async (req, res)=> {
     getData().then(()=> {
+        console.log(upcommingEvents)
         res.send({
             past: pastEvents,
             upcoming: upcommingEvents
